@@ -11,19 +11,18 @@ import BooksCard from '../components/home/BookCard';
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [showType, setShowType] = useState('table');
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get('https://bookstore-backend-a889.onrender.com/books') // Update endpoint if necessary
+      .get('http://localhost:5555/books')
       .then((response) => {
         setBooks(response.data.data);
         setLoading(false);
       })
-      .catch(() => {
-        setError('Failed to load books. Please try again later.');
+      .catch((error) => {
+        console.log(error);
         setLoading(false);
       });
   }, []);
@@ -52,8 +51,6 @@ const Home = () => {
       </div>
       {loading ? (
         <Spinner />
-      ) : error ? (
-        <p className="text-red-500">{error}</p>
       ) : showType === 'table' ? (
         <BooksTable books={books} />
       ) : (
