@@ -16,13 +16,17 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get('http://localhost:5555/books')
+      .get('https://bookstore-backend-a889.onrender.com/books', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
       .then((response) => {
         setBooks(response.data.data);
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        console.error('Error fetching books:', error);
         setLoading(false);
       });
   }, []);
@@ -61,6 +65,7 @@ const Home = () => {
 };
 
 export default Home;
+
 
 
 
