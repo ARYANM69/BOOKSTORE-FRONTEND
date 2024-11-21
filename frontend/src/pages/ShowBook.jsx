@@ -9,11 +9,11 @@ const ShowBook = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
-  // Update API URL for deployment
-  const API_URL = process.env.REACT_APP_API_URL || 'https://bookstore-backend-a889.onrender.com';  // For local development, you can use localhost
+  // Use environment variable for API URL
+  const API_URL = process.env.REACT_APP_API_URL || 'https://bookstore-backend-a889.onrender.com';  // Production URL or fallback to local
 
   useEffect(() => {
-    // Fetch book data from the backend
+    setLoading(true);
     axios
       .get(`${API_URL}/books/${id}`)
       .then((response) => {
@@ -24,7 +24,7 @@ const ShowBook = () => {
         console.error('Error fetching book details:', error);
         setLoading(false);
       });
-  }, [id, API_URL]);
+  }, [id]);
 
   if (loading) {
     return <Spinner />;
@@ -65,6 +65,7 @@ const ShowBook = () => {
 };
 
 export default ShowBook;
+
 
 
 
