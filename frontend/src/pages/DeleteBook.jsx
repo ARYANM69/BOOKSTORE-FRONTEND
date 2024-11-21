@@ -14,7 +14,7 @@ const DeleteBook = () => {
   const handleDeleteBook = () => {
     setLoading(true);
     axios
-      .delete(`http://localhost:5555/books/${id}`)
+      .delete(`https://bookstore-backend-a889.onrender.com/books/${id}`)  // Updated URL
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Book Deleted successfully', { variant: 'success' });
@@ -22,12 +22,11 @@ const DeleteBook = () => {
       })
       .catch((error) => {
         setLoading(false);
-        // alert('An error happened. Please Chack console');
         enqueueSnackbar('Error', { variant: 'error' });
         console.log(error);
       });
   };
-  
+
   return (
     <div className='p-4'>
       <BackButton />
@@ -44,8 +43,8 @@ const DeleteBook = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default DeleteBook;
 
