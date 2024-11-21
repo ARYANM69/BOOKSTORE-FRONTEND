@@ -12,7 +12,7 @@ const ShowBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/books/${id}`)
+      .get(`https://bookstore-backend-a889.onrender.com/books/${id}`)  // Updated URL
       .then((response) => {
         setBook(response.data);
         setLoading(false);
@@ -21,7 +21,7 @@ const ShowBook = () => {
         console.log(error);
         setLoading(false);
       });
-  }, []);
+  }, [id]);
 
   return (
     <div className='p-4'>
@@ -62,6 +62,7 @@ const ShowBook = () => {
 };
 
 export default ShowBook;
+
 
 
 
